@@ -46,7 +46,7 @@ public abstract class UploadTask implements Runnable {
     /**
      * Contains all the parameters set in {@link UploadRequest}.
      */
-    protected UploadTaskParameters params = null;
+    public UploadTaskParameters params = null;
 
     /**
      * Contains the absolute local path of the successfully uploaded files.
@@ -215,7 +215,7 @@ public abstract class UploadTask implements Runnable {
      * @param uploadedBytes number of bytes which has been uploaded to the server
      * @param totalBytes total bytes of the request
      */
-    protected final void broadcastProgress(final long uploadedBytes, final long totalBytes) {
+    public void broadcastProgress(final long uploadedBytes, final long totalBytes) {
 
         long currentTime = System.currentTimeMillis();
         if (uploadedBytes < totalBytes && currentTime < lastProgressNotificationTime + UploadService.PROGRESS_REPORT_INTERVAL) {

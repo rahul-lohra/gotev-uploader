@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 public abstract class HttpUploadTask extends UploadTask
         implements HttpConnection.RequestBodyDelegate, BodyWriter.OnStreamWriteListener {
 
-    private static final String LOG_TAG = HttpUploadTask.class.getSimpleName();
+    public static final String LOG_TAG = HttpUploadTask.class.getSimpleName();
 
     /**
      * Contains all the parameters set in {@link HttpUploadRequest}.
@@ -30,7 +30,7 @@ public abstract class HttpUploadTask extends UploadTask
     /**
      * {@link HttpConnection} used to perform the upload task.
      */
-    private HttpConnection connection;
+    public HttpConnection connection;
 
     @Override
     protected void init(UploadService service, Intent intent) throws IOException {
@@ -108,5 +108,6 @@ public abstract class HttpUploadTask extends UploadTask
         uploadedBytes += bytesWritten;
         broadcastProgress(uploadedBytes, totalBytes);
     }
+
 
 }

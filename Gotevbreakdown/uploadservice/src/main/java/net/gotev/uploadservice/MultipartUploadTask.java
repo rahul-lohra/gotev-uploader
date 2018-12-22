@@ -17,21 +17,21 @@ import java.nio.charset.Charset;
  */
 public class MultipartUploadTask extends HttpUploadTask {
 
-    protected static final String PARAM_UTF8_CHARSET = "multipartUtf8Charset";
+    public static final String PARAM_UTF8_CHARSET = "multipartUtf8Charset";
 
-    private static final String BOUNDARY_SIGNATURE = "-------AndroidUploadService";
-    private static final Charset US_ASCII = Charset.forName("US-ASCII");
-    private static final String NEW_LINE = "\r\n";
-    private static final String TWO_HYPHENS = "--";
+    public static final String BOUNDARY_SIGNATURE = "-------AndroidUploadService";
+    public static final Charset US_ASCII = Charset.forName("US-ASCII");
+    public static final String NEW_LINE = "\r\n";
+    public static final String TWO_HYPHENS = "--";
 
     // properties associated to each file
-    protected static final String PROPERTY_REMOTE_FILE_NAME = "httpRemoteFileName";
-    protected static final String PROPERTY_CONTENT_TYPE = "httpContentType";
-    protected static final String PROPERTY_PARAM_NAME = "httpParamName";
+    public static final String PROPERTY_REMOTE_FILE_NAME = "httpRemoteFileName";
+    public static final String PROPERTY_CONTENT_TYPE = "httpContentType";
+    public static final String PROPERTY_PARAM_NAME = "httpParamName";
 
-    private byte[] boundaryBytes;
-    private byte[] trailerBytes;
-    private Charset charset;
+    public byte[] boundaryBytes;
+    public byte[] trailerBytes;
+    public Charset charset;
 
     @Override
     protected void init(UploadService service, Intent intent) throws IOException {
@@ -115,7 +115,7 @@ public class MultipartUploadTask extends HttpUploadTask {
                 + NEW_LINE.getBytes(charset).length;
     }
 
-    private void writeRequestParameters(BodyWriter bodyWriter) throws IOException {
+    public void writeRequestParameters(BodyWriter bodyWriter) throws IOException {
         if (!httpParams.getRequestParameters().isEmpty()) {
             for (final NameValue parameter : httpParams.getRequestParameters()) {
                 bodyWriter.write(boundaryBytes);
@@ -128,7 +128,7 @@ public class MultipartUploadTask extends HttpUploadTask {
         }
     }
 
-    private void writeFiles(BodyWriter bodyWriter) throws IOException {
+    public void writeFiles(BodyWriter bodyWriter) throws IOException {
         for (UploadFile file : params.files) {
             if (!shouldContinue)
                 break;

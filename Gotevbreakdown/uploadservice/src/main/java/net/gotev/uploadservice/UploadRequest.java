@@ -16,7 +16,7 @@ public abstract class UploadRequest<B extends UploadRequest<B>> {
     private static final String LOG_TAG = UploadRequest.class.getSimpleName();
 
     protected final Context context;
-    protected final UploadTaskParameters params = new UploadTaskParameters();
+    public final UploadTaskParameters params = new UploadTaskParameters();
     protected UploadStatusDelegate delegate;
 
     /**
