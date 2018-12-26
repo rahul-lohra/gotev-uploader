@@ -4,9 +4,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
+import org.powermock.core.classloader.annotations.PowerMockIgnore
 import org.powermock.modules.junit4.PowerMockRunner
 import java.io.File
 
+@PowerMockIgnore("okhttp3.*")
 @RunWith(PowerMockRunner::class)
 class TestA{
     @Mock
@@ -14,11 +16,20 @@ class TestA{
 
     val testFilePath = "src/test/raw/large.jpg"
     @Test
-    fun upload(){
+    fun uploadFile(){
         val file = File(testFilePath)
 
         val presenter = MainPresenter()
         val code = presenter.uploadFile(context, file)
+        assert(code == 200)
+    }
+
+    @Test
+    fun uploadOkHttp(){
+        val file = File(testFilePath)
+
+        val presenter = MainPresenter()
+        val code = presenter.uploadFileOkHttp(context, file)
         assert(code == 200)
     }
 }
