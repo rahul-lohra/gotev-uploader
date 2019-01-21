@@ -1,16 +1,17 @@
 package com.rahul.`in`.gotev_breakdown
 
-import net.gotev.uploadservice.*
+import android.util.Log
 import net.gotev.uploadservice.BuildConfig
+import net.gotev.uploadservice.MultipartUploadTask
+import net.gotev.uploadservice.UploadTaskParameters
 import net.gotev.uploadservice.http.BodyWriter
 import net.gotev.uploadservice.http.impl.HurlStack
 import java.io.IOException
-import java.lang.Exception
 import java.nio.charset.Charset
 
-class FileUploadTask: MultipartUploadTask() {
+class FileUploadTask : MultipartUploadTask() {
 
-    fun setupParams(uploadParams:UploadTaskParameters){
+    fun setupParams(uploadParams: UploadTaskParameters) {
         params = uploadParams
     }
 
@@ -29,9 +30,7 @@ class FileUploadTask: MultipartUploadTask() {
 
     }
 
-    fun forceRun() = forceUpload()
-
-    fun initVars(){
+    fun initVars() {
         val boundary = BOUNDARY_SIGNATURE + System.nanoTime()
         boundaryBytes = (TWO_HYPHENS + boundary + NEW_LINE).toByteArray(US_ASCII)
         trailerBytes = (TWO_HYPHENS + boundary + TWO_HYPHENS + NEW_LINE).toByteArray(US_ASCII)
@@ -46,7 +45,7 @@ class FileUploadTask: MultipartUploadTask() {
         httpParams.addHeader("Content-Type", "multipart/form-data; boundary=$boundary")
     }
 
-    fun forceUpload():Int {
+    fun forceUpload(): Int {
 
         try {
             successfullyUploadedFiles.clear()
@@ -63,7 +62,6 @@ class FileUploadTask: MultipartUploadTask() {
                 .createNewConnection(httpParams.method, params.serverUrl)
                 .setHeaders(httpParams.requestHeaders)
                 .setTotalBodyBytes(totalBytes, httpParams.usesFixedLengthStreamingMode)
-
             val response = connection.getResponse(this)
             return response.httpCode
         } finally {

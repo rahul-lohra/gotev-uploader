@@ -21,9 +21,14 @@ android {
         }
     }
 
+    packagingOptions {
+        pickFirst "**"
+    }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
 
 }
 
@@ -34,5 +39,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     api project(':uploadservice')
     implementation("com.squareup.okhttp3:okhttp:3.12.0")
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+
 
 }
